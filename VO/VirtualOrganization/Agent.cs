@@ -1,0 +1,7 @@
+﻿
+namespace VirtualOrganization
+{
+    class Agent
+    {
+    }
+}
