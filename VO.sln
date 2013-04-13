@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualOrganization", "VirtualOrganization\VirtualOrganization.csproj", "{4A4B9189-6491-4AF7-9058-933BC7F0ABDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualOrganization", "src\VirtualOrganization\VirtualOrganization.csproj", "{4A4B9189-6491-4AF7-9058-933BC7F0ABDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonstrateVO", "DemonstrateVO\DemonstrateVO.csproj", "{15EDC588-74AC-459D-AC3B-2E2902D1B82F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonstrateVO", "src\DemonstrateVO\DemonstrateVO.csproj", "{15EDC588-74AC-459D-AC3B-2E2902D1B82F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
