@@ -29,7 +29,7 @@ namespace VirtualOrganization
         }
 
         /// <summary>
-        /// Send message for another agent
+        /// Send message to another agent
         /// </summary>
         /// <param name="receiverAgent">Receiver agent</param>
         /// <param name="message">Message</param>
