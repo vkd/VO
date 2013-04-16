@@ -1,21 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Messaging;
-using System;
 
 namespace VirtualOrganization
 {
+    /// <summary>
+    /// Service for send and receive messages from MSMQ
+    /// </summary>
     public class MSMQService : IMessageService
     {
+        /// <summary>
+        /// Prefix for path of agent
+        /// </summary>
         private const string PREFIX_PATH = @".\private$\";
 
-        private string _pathServiceName = "";
+        /// <summary>
+        /// Path of this agent
+        /// </summary>
+        private string _pathService = "";
 
-        public MSMQService(string pathServiceName)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="pathService">Path of this agent</param>
+        public MSMQService(string pathService)
         {
-            _pathServiceName = pathServiceName;
+            _pathService = pathService;
             BeginReceive();
         }
 
+        /// <summary>
+        /// Send message for another agent
+        /// </summary>
+        /// <param name="receiverAgent">Receiver agent</param>
+        /// <param name="message">Message</param>
         public void SendMessage(string receiverAgent, AgentMessage message)
         {
             string pathAgent = PREFIX_PATH + receiverAgent;
@@ -29,9 +46,12 @@ namespace VirtualOrganization
             mq.Send(message);
         }
 
+        /// <summary>
+        /// Initiates an asynchronous receive operation
+        /// </summary>
         private void BeginReceive()
         {
-            string pathAgent = PREFIX_PATH + _pathServiceName;
+            string pathAgent = PREFIX_PATH + _pathService;
 
             MessageQueue mq;
             if (MessageQueue.Exists(pathAgent))
@@ -44,6 +64,11 @@ namespace VirtualOrganization
             mq.BeginReceive();
         }
 
+        /// <summary>
+        /// Receive messages
+        /// </summary>
+        /// <param name="sender">MessageQueue</param>
+        /// <param name="e">ReceiveCompletedEventArgs</param>
         private void MessageQueue_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
         {
             MessageQueue mq = (MessageQueue)sender;
@@ -54,6 +79,9 @@ namespace VirtualOrganization
             mq.BeginReceive();
         }
 
+        /// <summary>
+        /// Event of publish message
+        /// </summary>
         public event AgentMessageEventHandler Publish;
     }
 }
