@@ -6,7 +6,7 @@ namespace VirtualOrganization
     /// <summary>
     /// Service for send and receive messages from MSMQ
     /// </summary>
-    public class MSMQService : IMessageService
+    class MSMQService : IMessageService
     {
         /// <summary>
         /// Prefix for path of agent
@@ -25,7 +25,7 @@ namespace VirtualOrganization
         public MSMQService(string pathService)
         {
             _pathService = pathService;
-            BeginReceive();
+            BeginReceive(_pathService);
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace VirtualOrganization
         /// <summary>
         /// Initiates an asynchronous receive operation
         /// </summary>
-        private void BeginReceive()
+        private void BeginReceive(string senderAgent)
         {
-            string pathAgent = PREFIX_PATH + _pathService;
+            string pathAgent = PREFIX_PATH + senderAgent;
 
             MessageQueue mq;
             if (MessageQueue.Exists(pathAgent))

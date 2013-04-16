@@ -15,7 +15,7 @@ namespace VirtualOrganization
         /// </summary>
         /// <param name="receiverAgent">Receiver agent</param>
         /// <param name="message">Message</param>
-        public void SendMessage(string receiverAgent, AgentMessage message);
+        void SendMessage(string receiverAgent, AgentMessage message);
 
         /// <summary>
         /// Event of publish message
