@@ -43,6 +43,7 @@ namespace VirtualOrganization
             else
                 mq = MessageQueue.Create(pathAgent);
 
+            message.SenderAgent = _pathService;
             mq.Send(message);
         }
 

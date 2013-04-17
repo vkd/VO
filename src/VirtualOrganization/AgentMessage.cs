@@ -4,8 +4,13 @@ namespace VirtualOrganization
     /// <summary>
     /// Message
     /// </summary>
-    public class AgentMessage
+    class AgentMessage
     {
+        /// <summary>
+        /// Sender agent
+        /// </summary>
+        public string SenderAgent { get; set; }
+
         /// <summary>
         /// Subject
         /// </summary>
@@ -15,5 +20,22 @@ namespace VirtualOrganization
         /// Text message
         /// </summary>
         public string Text { get; set; }
+
+        /// <summary>
+        /// Type of message
+        /// </summary>
+        public MessageType MessageType { get; set; }
+    }
+
+    /// <summary>
+    /// Type of message
+    /// </summary>
+    enum MessageType
+    {
+        Message,
+        Subscribe,
+        Unsubscribe,
+        AddAgent,
+        DeleteAgent
     }
 }

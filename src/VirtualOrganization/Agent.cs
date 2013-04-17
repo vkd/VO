@@ -1,34 +1,32 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 namespace VirtualOrganization
 {
     public class Agent
     {
-        private IMessageService _messageService;
+        RoutingService _routingService;
 
-        private string _agentName = "";
-
-        event AgentMessageEventHandler Publish;
-
-        public Agent(string agentName)
+        public Agent(string agentName, string[] nearAgents = null)
         {
-            _agentName = agentName;
+            AgentName = agentName;
+            _routingService = new RoutingService(AgentName, nearAgents);
 
-            _messageService = new MSMQService(_agentName);
-            _messageService.Publish += new AgentMessageEventHandler(MessageService_Publish);
-
+            _routingService.ReceiveMessageEvent += new AgentMessageEventHandler(RoutingService_ReceiveMessageEvent);
         }
 
-        void MessageService_Publish(AgentMessageEventArgs e)
+        void RoutingService_ReceiveMessageEvent(AgentMessageEventArgs e)
         {
-            Publish(new AgentMessageEventArgs(e.AgentMessage));
-
-
+            throw new NotImplementedException();
         }
 
-        public string AgentName
+        public void AddNearAgent(string nearAgent)
         {
-            get { return _agentName; }
-            set { _agentName = value; }
+            _routingService.AddNearAgent(nearAgent);
         }
+
+        public string AgentName { get; private set; }
     }
 }
