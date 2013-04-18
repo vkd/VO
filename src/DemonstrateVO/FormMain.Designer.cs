@@ -28,78 +28,226 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbAgentName1 = new System.Windows.Forms.TextBox();
-            this.btnSend1 = new System.Windows.Forms.Button();
-            this.btnReceive2 = new System.Windows.Forms.Button();
-            this.tbAgentName2 = new System.Windows.Forms.TextBox();
-            this.tbMessage1 = new System.Windows.Forms.TextBox();
-            this.tbMessage2 = new System.Windows.Forms.TextBox();
+            this.lblPublish = new System.Windows.Forms.Label();
+            this.tbPublishSubject = new System.Windows.Forms.TextBox();
+            this.btnPublish = new System.Windows.Forms.Button();
+            this.lbLog = new System.Windows.Forms.ListBox();
+            this.tbPublishMessage = new System.Windows.Forms.TextBox();
+            this.btnSubscribe = new System.Windows.Forms.Button();
+            this.tbSubscribeSubject = new System.Windows.Forms.TextBox();
+            this.lblSubscribe = new System.Windows.Forms.Label();
+            this.btnUnsubscribe = new System.Windows.Forms.Button();
+            this.tbUnsubscribeSubject = new System.Windows.Forms.TextBox();
+            this.lblUnsubscribe = new System.Windows.Forms.Label();
+            this.btnAddNearAgent = new System.Windows.Forms.Button();
+            this.tbAddNearAgent = new System.Windows.Forms.TextBox();
+            this.lblAddNearAgent = new System.Windows.Forms.Label();
+            this.tbAgent = new System.Windows.Forms.TextBox();
+            this.lblAgent = new System.Windows.Forms.Label();
+            this.btnSetAgent = new System.Windows.Forms.Button();
+            this.lbSubscribed = new System.Windows.Forms.ListBox();
+            this.lbNearAgents = new System.Windows.Forms.ListBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // tbAgentName1
+            // lblPublish
             // 
-            this.tbAgentName1.Location = new System.Drawing.Point(29, 12);
-            this.tbAgentName1.Name = "tbAgentName1";
-            this.tbAgentName1.Size = new System.Drawing.Size(100, 20);
-            this.tbAgentName1.TabIndex = 0;
-            this.tbAgentName1.Text = "agent01";
+            this.lblPublish.AutoSize = true;
+            this.lblPublish.Location = new System.Drawing.Point(169, 67);
+            this.lblPublish.Name = "lblPublish";
+            this.lblPublish.Size = new System.Drawing.Size(44, 13);
+            this.lblPublish.TabIndex = 0;
+            this.lblPublish.Text = "Publish:";
             // 
-            // btnSend1
+            // tbPublishSubject
             // 
-            this.btnSend1.Location = new System.Drawing.Point(29, 64);
-            this.btnSend1.Name = "btnSend1";
-            this.btnSend1.Size = new System.Drawing.Size(100, 23);
-            this.btnSend1.TabIndex = 1;
-            this.btnSend1.Text = "Send";
-            this.btnSend1.UseVisualStyleBackColor = true;
-            this.btnSend1.Click += new System.EventHandler(this.button1_Click);
+            this.tbPublishSubject.Location = new System.Drawing.Point(172, 83);
+            this.tbPublishSubject.Name = "tbPublishSubject";
+            this.tbPublishSubject.Size = new System.Drawing.Size(120, 20);
+            this.tbPublishSubject.TabIndex = 1;
             // 
-            // btnReceive2
+            // btnPublish
             // 
-            this.btnReceive2.Location = new System.Drawing.Point(162, 64);
-            this.btnReceive2.Name = "btnReceive2";
-            this.btnReceive2.Size = new System.Drawing.Size(100, 23);
-            this.btnReceive2.TabIndex = 3;
-            this.btnReceive2.Text = "Receive";
-            this.btnReceive2.UseVisualStyleBackColor = true;
-            this.btnReceive2.Click += new System.EventHandler(this.btnReceive2_Click);
+            this.btnPublish.Location = new System.Drawing.Point(231, 135);
+            this.btnPublish.Name = "btnPublish";
+            this.btnPublish.Size = new System.Drawing.Size(61, 20);
+            this.btnPublish.TabIndex = 2;
+            this.btnPublish.Text = "Publish";
+            this.btnPublish.UseVisualStyleBackColor = true;
+            this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
             // 
-            // tbAgentName2
+            // lbLog
             // 
-            this.tbAgentName2.Location = new System.Drawing.Point(162, 12);
-            this.tbAgentName2.Name = "tbAgentName2";
-            this.tbAgentName2.Size = new System.Drawing.Size(100, 20);
-            this.tbAgentName2.TabIndex = 2;
-            this.tbAgentName2.Text = "agent01";
+            this.lbLog.FormattingEnabled = true;
+            this.lbLog.Location = new System.Drawing.Point(12, 12);
+            this.lbLog.Name = "lbLog";
+            this.lbLog.Size = new System.Drawing.Size(150, 355);
+            this.lbLog.TabIndex = 3;
             // 
-            // tbMessage1
+            // tbPublishMessage
             // 
-            this.tbMessage1.Location = new System.Drawing.Point(29, 38);
-            this.tbMessage1.Name = "tbMessage1";
-            this.tbMessage1.Size = new System.Drawing.Size(100, 20);
-            this.tbMessage1.TabIndex = 4;
+            this.tbPublishMessage.Location = new System.Drawing.Point(172, 109);
+            this.tbPublishMessage.Name = "tbPublishMessage";
+            this.tbPublishMessage.Size = new System.Drawing.Size(120, 20);
+            this.tbPublishMessage.TabIndex = 4;
             // 
-            // tbMessage2
+            // btnSubscribe
             // 
-            this.tbMessage2.Location = new System.Drawing.Point(162, 38);
-            this.tbMessage2.Name = "tbMessage2";
-            this.tbMessage2.Size = new System.Drawing.Size(100, 20);
-            this.tbMessage2.TabIndex = 5;
+            this.btnSubscribe.Location = new System.Drawing.Point(231, 202);
+            this.btnSubscribe.Name = "btnSubscribe";
+            this.btnSubscribe.Size = new System.Drawing.Size(61, 20);
+            this.btnSubscribe.TabIndex = 7;
+            this.btnSubscribe.Text = "Subscribe";
+            this.btnSubscribe.UseVisualStyleBackColor = true;
+            this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
+            // 
+            // tbSubscribeSubject
+            // 
+            this.tbSubscribeSubject.Location = new System.Drawing.Point(172, 176);
+            this.tbSubscribeSubject.Name = "tbSubscribeSubject";
+            this.tbSubscribeSubject.Size = new System.Drawing.Size(120, 20);
+            this.tbSubscribeSubject.TabIndex = 6;
+            // 
+            // lblSubscribe
+            // 
+            this.lblSubscribe.AutoSize = true;
+            this.lblSubscribe.Location = new System.Drawing.Point(169, 160);
+            this.lblSubscribe.Name = "lblSubscribe";
+            this.lblSubscribe.Size = new System.Drawing.Size(57, 13);
+            this.lblSubscribe.TabIndex = 5;
+            this.lblSubscribe.Text = "Subscribe:";
+            // 
+            // btnUnsubscribe
+            // 
+            this.btnUnsubscribe.Location = new System.Drawing.Point(231, 276);
+            this.btnUnsubscribe.Name = "btnUnsubscribe";
+            this.btnUnsubscribe.Size = new System.Drawing.Size(61, 20);
+            this.btnUnsubscribe.TabIndex = 10;
+            this.btnUnsubscribe.Text = "Unsubscribe";
+            this.btnUnsubscribe.UseVisualStyleBackColor = true;
+            this.btnUnsubscribe.Click += new System.EventHandler(this.btnUnsubscribe_Click);
+            // 
+            // tbUnsubscribeSubject
+            // 
+            this.tbUnsubscribeSubject.Location = new System.Drawing.Point(172, 250);
+            this.tbUnsubscribeSubject.Name = "tbUnsubscribeSubject";
+            this.tbUnsubscribeSubject.Size = new System.Drawing.Size(120, 20);
+            this.tbUnsubscribeSubject.TabIndex = 9;
+            // 
+            // lblUnsubscribe
+            // 
+            this.lblUnsubscribe.AutoSize = true;
+            this.lblUnsubscribe.Location = new System.Drawing.Point(169, 234);
+            this.lblUnsubscribe.Name = "lblUnsubscribe";
+            this.lblUnsubscribe.Size = new System.Drawing.Size(69, 13);
+            this.lblUnsubscribe.TabIndex = 8;
+            this.lblUnsubscribe.Text = "Unsubscribe:";
+            // 
+            // btnAddNearAgent
+            // 
+            this.btnAddNearAgent.Location = new System.Drawing.Point(199, 348);
+            this.btnAddNearAgent.Name = "btnAddNearAgent";
+            this.btnAddNearAgent.Size = new System.Drawing.Size(90, 20);
+            this.btnAddNearAgent.TabIndex = 13;
+            this.btnAddNearAgent.Text = "Add near agent";
+            this.btnAddNearAgent.UseVisualStyleBackColor = true;
+            this.btnAddNearAgent.Click += new System.EventHandler(this.btnAddNearAgent_Click);
+            // 
+            // tbAddNearAgent
+            // 
+            this.tbAddNearAgent.Location = new System.Drawing.Point(169, 322);
+            this.tbAddNearAgent.Name = "tbAddNearAgent";
+            this.tbAddNearAgent.Size = new System.Drawing.Size(120, 20);
+            this.tbAddNearAgent.TabIndex = 12;
+            // 
+            // lblAddNearAgent
+            // 
+            this.lblAddNearAgent.AutoSize = true;
+            this.lblAddNearAgent.Location = new System.Drawing.Point(166, 306);
+            this.lblAddNearAgent.Name = "lblAddNearAgent";
+            this.lblAddNearAgent.Size = new System.Drawing.Size(83, 13);
+            this.lblAddNearAgent.TabIndex = 11;
+            this.lblAddNearAgent.Text = "Add near agent:";
+            // 
+            // tbAgent
+            // 
+            this.tbAgent.Location = new System.Drawing.Point(213, 12);
+            this.tbAgent.Name = "tbAgent";
+            this.tbAgent.Size = new System.Drawing.Size(79, 20);
+            this.tbAgent.TabIndex = 14;
+            // 
+            // lblAgent
+            // 
+            this.lblAgent.AutoSize = true;
+            this.lblAgent.Location = new System.Drawing.Point(169, 15);
+            this.lblAgent.Name = "lblAgent";
+            this.lblAgent.Size = new System.Drawing.Size(38, 13);
+            this.lblAgent.TabIndex = 15;
+            this.lblAgent.Text = "Agent:";
+            // 
+            // btnSetAgent
+            // 
+            this.btnSetAgent.Location = new System.Drawing.Point(231, 38);
+            this.btnSetAgent.Name = "btnSetAgent";
+            this.btnSetAgent.Size = new System.Drawing.Size(61, 20);
+            this.btnSetAgent.TabIndex = 16;
+            this.btnSetAgent.Text = "Set agent";
+            this.btnSetAgent.UseVisualStyleBackColor = true;
+            this.btnSetAgent.Click += new System.EventHandler(this.btnSetAgent_Click);
+            // 
+            // lbSubscribed
+            // 
+            this.lbSubscribed.FormattingEnabled = true;
+            this.lbSubscribed.Location = new System.Drawing.Point(298, 160);
+            this.lbSubscribed.Name = "lbSubscribed";
+            this.lbSubscribed.Size = new System.Drawing.Size(78, 121);
+            this.lbSubscribed.TabIndex = 17;
+            // 
+            // lbNearAgents
+            // 
+            this.lbNearAgents.FormattingEnabled = true;
+            this.lbNearAgents.Location = new System.Drawing.Point(298, 293);
+            this.lbNearAgents.Name = "lbNearAgents";
+            this.lbNearAgents.Size = new System.Drawing.Size(78, 82);
+            this.lbNearAgents.TabIndex = 18;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(298, 10);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(78, 23);
+            this.btnRefresh.TabIndex = 19;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.tbMessage2);
-            this.Controls.Add(this.tbMessage1);
-            this.Controls.Add(this.btnReceive2);
-            this.Controls.Add(this.tbAgentName2);
-            this.Controls.Add(this.btnSend1);
-            this.Controls.Add(this.tbAgentName1);
+            this.ClientSize = new System.Drawing.Size(381, 378);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.lbNearAgents);
+            this.Controls.Add(this.lbSubscribed);
+            this.Controls.Add(this.btnSetAgent);
+            this.Controls.Add(this.lblAgent);
+            this.Controls.Add(this.tbAgent);
+            this.Controls.Add(this.btnAddNearAgent);
+            this.Controls.Add(this.tbAddNearAgent);
+            this.Controls.Add(this.lblAddNearAgent);
+            this.Controls.Add(this.btnUnsubscribe);
+            this.Controls.Add(this.tbUnsubscribeSubject);
+            this.Controls.Add(this.lblUnsubscribe);
+            this.Controls.Add(this.btnSubscribe);
+            this.Controls.Add(this.tbSubscribeSubject);
+            this.Controls.Add(this.lblSubscribe);
+            this.Controls.Add(this.tbPublishMessage);
+            this.Controls.Add(this.lbLog);
+            this.Controls.Add(this.btnPublish);
+            this.Controls.Add(this.tbPublishSubject);
+            this.Controls.Add(this.lblPublish);
             this.Name = "FormMain";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,12 +255,27 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbAgentName1;
-        private System.Windows.Forms.Button btnSend1;
-        private System.Windows.Forms.Button btnReceive2;
-        private System.Windows.Forms.TextBox tbAgentName2;
-        private System.Windows.Forms.TextBox tbMessage1;
-        private System.Windows.Forms.TextBox tbMessage2;
+        private System.Windows.Forms.Label lblPublish;
+        private System.Windows.Forms.TextBox tbPublishSubject;
+        private System.Windows.Forms.Button btnPublish;
+        private System.Windows.Forms.ListBox lbLog;
+        private System.Windows.Forms.TextBox tbPublishMessage;
+        private System.Windows.Forms.Button btnSubscribe;
+        private System.Windows.Forms.TextBox tbSubscribeSubject;
+        private System.Windows.Forms.Label lblSubscribe;
+        private System.Windows.Forms.Button btnUnsubscribe;
+        private System.Windows.Forms.TextBox tbUnsubscribeSubject;
+        private System.Windows.Forms.Label lblUnsubscribe;
+        private System.Windows.Forms.Button btnAddNearAgent;
+        private System.Windows.Forms.TextBox tbAddNearAgent;
+        private System.Windows.Forms.Label lblAddNearAgent;
+        private System.Windows.Forms.TextBox tbAgent;
+        private System.Windows.Forms.Label lblAgent;
+        private System.Windows.Forms.Button btnSetAgent;
+        private System.Windows.Forms.ListBox lbSubscribed;
+        private System.Windows.Forms.ListBox lbNearAgents;
+        private System.Windows.Forms.Button btnRefresh;
+
     }
 }
 

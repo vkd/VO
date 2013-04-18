@@ -15,9 +15,12 @@ namespace VirtualOrganization
         {
             AgentName = agentName;
 
-            foreach (var nearAgent in nearAgents)
+            if (nearAgents != null)
             {
-                _nearAgents.Add(nearAgent);
+                foreach (var nearAgent in nearAgents)
+                {
+                    _nearAgents.Add(nearAgent);
+                }
             }
 
             _messageService = new MSMQService(AgentName);
@@ -70,6 +73,28 @@ namespace VirtualOrganization
             };
 
             SendMessageToNearAgents(msg);
+        }
+
+        public List<string> GetSubscribed()
+        {
+            List<string> outList = new List<string>();
+
+            foreach (var route in _routingTable)
+            {
+                string line = route.Key + ":";
+                foreach (var agent in route.Value)
+                {
+                    line += " " + agent;
+                }
+                outList.Add(line);
+            }
+
+            return outList;
+        }
+
+        public List<string> GetNearAgents()
+        {
+            return _nearAgents;
         }
 
         private void AddRoute(string agentName, string subject)

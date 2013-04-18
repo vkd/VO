@@ -9,6 +9,8 @@ namespace VirtualOrganization
     {
         RoutingService _routingService;
 
+        public event AgentMessageEventHandler ReceiveMessage;
+
         public Agent(string agentName, string[] nearAgents = null)
         {
             AgentName = agentName;
@@ -19,12 +21,37 @@ namespace VirtualOrganization
 
         void RoutingService_ReceiveMessageEvent(AgentMessageEventArgs e)
         {
-            throw new NotImplementedException();
+            ReceiveMessage(new AgentMessageEventArgs(e.AgentMessage));
         }
 
         public void AddNearAgent(string nearAgent)
         {
             _routingService.AddNearAgent(nearAgent);
+        }
+
+        public void Publish(string subject, string text)
+        {
+            _routingService.Publish(subject, text);
+        }
+
+        public void Subscribe(string subject)
+        {
+            _routingService.Subscribe(subject);
+        }
+
+        public void Unsubscribe(string subject)
+        {
+            _routingService.Unsubscribe(subject);
+        }
+
+        public List<string> GetListSubscribed()
+        {
+            return _routingService.GetSubscribed();
+        }
+
+        public List<string> GetNearAgents()
+        {
+            return _routingService.GetNearAgents();
         }
 
         public string AgentName { get; private set; }

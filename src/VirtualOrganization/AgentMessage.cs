@@ -4,7 +4,7 @@ namespace VirtualOrganization
     /// <summary>
     /// Message
     /// </summary>
-    class AgentMessage
+    public class AgentMessage
     {
         /// <summary>
         /// Sender agent
@@ -30,12 +30,10 @@ namespace VirtualOrganization
     /// <summary>
     /// Type of message
     /// </summary>
-    enum MessageType
+    public enum MessageType
     {
         Message,
         Subscribe,
-        Unsubscribe,
-        AddAgent,
-        DeleteAgent
+        Unsubscribe
     }
 }
