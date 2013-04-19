@@ -45,9 +45,10 @@
             this.tbAgent = new System.Windows.Forms.TextBox();
             this.lblAgent = new System.Windows.Forms.Label();
             this.btnSetAgent = new System.Windows.Forms.Button();
-            this.lbSubscribed = new System.Windows.Forms.ListBox();
+            this.lbRouting = new System.Windows.Forms.ListBox();
             this.lbNearAgents = new System.Windows.Forms.ListBox();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.lbSubscribed = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // lblPublish
@@ -195,13 +196,13 @@
             this.btnSetAgent.UseVisualStyleBackColor = true;
             this.btnSetAgent.Click += new System.EventHandler(this.btnSetAgent_Click);
             // 
-            // lbSubscribed
+            // lbRouting
             // 
-            this.lbSubscribed.FormattingEnabled = true;
-            this.lbSubscribed.Location = new System.Drawing.Point(298, 160);
-            this.lbSubscribed.Name = "lbSubscribed";
-            this.lbSubscribed.Size = new System.Drawing.Size(78, 121);
-            this.lbSubscribed.TabIndex = 17;
+            this.lbRouting.FormattingEnabled = true;
+            this.lbRouting.Location = new System.Drawing.Point(298, 160);
+            this.lbRouting.Name = "lbRouting";
+            this.lbRouting.Size = new System.Drawing.Size(78, 121);
+            this.lbRouting.TabIndex = 17;
             // 
             // lbNearAgents
             // 
@@ -221,14 +222,23 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // lbSubscribed
+            // 
+            this.lbSubscribed.FormattingEnabled = true;
+            this.lbSubscribed.Location = new System.Drawing.Point(298, 46);
+            this.lbSubscribed.Name = "lbSubscribed";
+            this.lbSubscribed.Size = new System.Drawing.Size(78, 108);
+            this.lbSubscribed.TabIndex = 20;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 378);
+            this.Controls.Add(this.lbSubscribed);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lbNearAgents);
-            this.Controls.Add(this.lbSubscribed);
+            this.Controls.Add(this.lbRouting);
             this.Controls.Add(this.btnSetAgent);
             this.Controls.Add(this.lblAgent);
             this.Controls.Add(this.tbAgent);
@@ -272,9 +282,10 @@
         private System.Windows.Forms.TextBox tbAgent;
         private System.Windows.Forms.Label lblAgent;
         private System.Windows.Forms.Button btnSetAgent;
-        private System.Windows.Forms.ListBox lbSubscribed;
+        private System.Windows.Forms.ListBox lbRouting;
         private System.Windows.Forms.ListBox lbNearAgents;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ListBox lbSubscribed;
 
     }
 }

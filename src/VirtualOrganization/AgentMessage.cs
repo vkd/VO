@@ -34,6 +34,8 @@ namespace VirtualOrganization
     {
         Message,
         Subscribe,
-        Unsubscribe
+        Unsubscribe,
+        Hello,
+        Bye
     }
 }

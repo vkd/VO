@@ -44,14 +44,19 @@ namespace VirtualOrganization
             _routingService.Unsubscribe(subject);
         }
 
-        public List<string> GetListSubscribed()
+        public List<string> GetRoutingList()
         {
-            return _routingService.GetSubscribed();
+            return _routingService.GetRouting();
         }
 
         public List<string> GetNearAgents()
         {
             return _routingService.GetNearAgents();
+        }
+
+        public List<string> GetSubscribed()
+        {
+            return _routingService.GetSubscribed();
         }
 
         public string AgentName { get; private set; }

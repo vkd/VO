@@ -7,6 +7,7 @@ namespace VirtualOrganization
         private IMessageService _messageService;
 
         private Dictionary<string, List<string>> _routingTable = new Dictionary<string, List<string>>();
+        private List<string> _subscribed = new List<string>();
         private List<string> _nearAgents = new List<string>();
 
         public event AgentMessageEventHandler ReceiveMessageEvent;
@@ -31,11 +32,38 @@ namespace VirtualOrganization
         public void AddNearAgent(string nearAgent)
         {
             _nearAgents.Add(nearAgent);
+
+            AgentMessage msg = new AgentMessage()
+            {
+                MessageType = MessageType.Hello,
+                SenderAgent = AgentName
+            };
+            _messageService.SendMessage(nearAgent, msg);
         }
 
         public void RemoveNearAgent(string nearAgent)
         {
             _nearAgents.Remove(nearAgent);
+
+            AgentMessage msg = new AgentMessage()
+            {
+                MessageType = MessageType.Bye,
+                SenderAgent = AgentName
+            };
+            _messageService.SendMessage(nearAgent, msg);
+
+            List<string> removeKeys = new List<string>();
+            foreach (var route in _routingTable)
+            {
+                route.Value.Remove(nearAgent);
+                if (route.Value.Count == 0)
+                    removeKeys.Add(route.Key);
+            }
+
+            foreach (var key in removeKeys)
+            {
+                _routingTable.Remove(key);
+            }
         }
 
         public void Publish(string subject, string text)
@@ -75,7 +103,7 @@ namespace VirtualOrganization
             SendMessageToNearAgents(msg);
         }
 
-        public List<string> GetSubscribed()
+        public List<string> GetRouting()
         {
             List<string> outList = new List<string>();
 
@@ -95,6 +123,11 @@ namespace VirtualOrganization
         public List<string> GetNearAgents()
         {
             return _nearAgents;
+        }
+
+        public List<string> GetSubscribed()
+        {
+            return _subscribed;
         }
 
         private void AddRoute(string agentName, string subject)

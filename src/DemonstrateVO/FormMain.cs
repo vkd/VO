@@ -52,8 +52,9 @@ namespace DemonstrateVO
 
         private void Refresh()
         {
-            RefreshSubscribed();
+            RefreshRouting();
             RefreshNearAgents();
+            RefreshSubscribed();
         }
 
         private void RefreshNearAgents()
@@ -67,9 +68,20 @@ namespace DemonstrateVO
             }
         }
 
+        private void RefreshRouting()
+        {
+            List<string> list = _agent.GetRoutingList();
+
+            lbRouting.Items.Clear();
+            foreach (var line in list)
+            {
+                lbRouting.Items.Add(line);
+            }
+        }
+
         private void RefreshSubscribed()
         {
-            List<string> list = _agent.GetListSubscribed();
+            List<string> list = _agent.GetSubscribed();
 
             lbSubscribed.Items.Clear();
             foreach (var line in list)
