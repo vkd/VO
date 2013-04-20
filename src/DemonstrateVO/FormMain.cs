@@ -41,17 +41,24 @@ namespace DemonstrateVO
 
             //MessageBox.Show(msg);
 
-            if (lbLog.InvokeRequired)
+            if (lbLog.InvokeRequired || lbNearAgents.InvokeRequired 
+                || lbRouting.InvokeRequired || lbSubscribed.InvokeRequired)
             {
-                AddStringToListBox d = new AddStringToListBox((text) => { lbLog.Items.Add(text); });
+                AddStringToListBox d = new AddStringToListBox((text) => { InvokeReceiveMessage(text); });
                 this.Invoke(d, new object[] { msg });
             }
             else
             {
-                lbLog.Items.Add(msg);
+                InvokeReceiveMessage(msg);
             }
             //lbLog.Items.Add(msg);
             //lbLog.SelectedIndex = lbLog.Items.Count - 1;
+        }
+
+        private void InvokeReceiveMessage(string msg)
+        {
+            lbLog.Items.Add(msg);
+            Refresh();
         }
 
         private void Refresh()
@@ -121,6 +128,11 @@ namespace DemonstrateVO
         private void btnRefresh_Click(object sender, System.EventArgs e)
         {
             Refresh();
+        }
+
+        private void btnRemoveNearAgent_Click(object sender, System.EventArgs e)
+        {
+            _agent.RemoveNearAgent(tbAddNearAgent.Text);
         }
     }
 }

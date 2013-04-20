@@ -49,6 +49,7 @@
             this.lbNearAgents = new System.Windows.Forms.ListBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lbSubscribed = new System.Windows.Forms.ListBox();
+            this.btnRemoveNearAgent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblPublish
@@ -146,7 +147,7 @@
             // 
             // btnAddNearAgent
             // 
-            this.btnAddNearAgent.Location = new System.Drawing.Point(199, 348);
+            this.btnAddNearAgent.Location = new System.Drawing.Point(172, 348);
             this.btnAddNearAgent.Name = "btnAddNearAgent";
             this.btnAddNearAgent.Size = new System.Drawing.Size(90, 20);
             this.btnAddNearAgent.TabIndex = 13;
@@ -230,11 +231,22 @@
             this.lbSubscribed.Size = new System.Drawing.Size(78, 108);
             this.lbSubscribed.TabIndex = 20;
             // 
+            // btnRemoveNearAgent
+            // 
+            this.btnRemoveNearAgent.Location = new System.Drawing.Point(268, 347);
+            this.btnRemoveNearAgent.Name = "btnRemoveNearAgent";
+            this.btnRemoveNearAgent.Size = new System.Drawing.Size(24, 20);
+            this.btnRemoveNearAgent.TabIndex = 21;
+            this.btnRemoveNearAgent.Text = "-";
+            this.btnRemoveNearAgent.UseVisualStyleBackColor = true;
+            this.btnRemoveNearAgent.Click += new System.EventHandler(this.btnRemoveNearAgent_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 378);
+            this.Controls.Add(this.btnRemoveNearAgent);
             this.Controls.Add(this.lbSubscribed);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lbNearAgents);
@@ -286,6 +298,7 @@
         private System.Windows.Forms.ListBox lbNearAgents;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ListBox lbSubscribed;
+        private System.Windows.Forms.Button btnRemoveNearAgent;
 
     }
 }

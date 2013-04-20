@@ -39,6 +39,8 @@ namespace VirtualOrganization
                 SenderAgent = AgentName
             };
             _messageService.SendMessage(nearAgent, msg);
+
+            SubscribeAll(nearAgent);
         }
 
         public void RemoveNearAgent(string nearAgent)
@@ -70,16 +72,19 @@ namespace VirtualOrganization
 
         public void Subscribe(string subject)
         {
-            _subscribed.Add(subject);
-
-            AgentMessage msg = new AgentMessage()
+            if (!_subscribed.Exists(s => s == subject))
             {
-                MessageType = MessageType.Subscribe,
-                SenderAgent = AgentName,
-                Subject = subject
-            };
+                _subscribed.Add(subject);
 
-            SendMessageToNearAgents(msg);
+                AgentMessage msg = new AgentMessage()
+                {
+                    MessageType = MessageType.Subscribe,
+                    SenderAgent = AgentName,
+                    Subject = subject
+                };
+
+                SendMessageToNearAgents(msg);
+            }
         }
 
         public void Unsubscribe(string subject)
@@ -144,7 +149,8 @@ namespace VirtualOrganization
             List<string> outList;
             if (_routingTable.TryGetValue(subject, out outList))
             {
-                outList.Add(agentName);
+                if (!outList.Exists(r => r == agentName))
+                    outList.Add(agentName);
             }
             else
             {
@@ -159,7 +165,7 @@ namespace VirtualOrganization
             List<string> outList;
             if (_routingTable.TryGetValue(subject, out outList))
             {
-                outList.Remove(subject);
+                outList.Remove(agentName);
 
                 if (outList.Count <= 0)
                 {
@@ -220,7 +226,8 @@ namespace VirtualOrganization
                     break;
                 case MessageType.Bye:
                     RemoveAgentFromRoutingTable(message.SenderAgent);
-                    RemoveNearAgent(message.SenderAgent);
+                    _nearAgents.Remove(message.SenderAgent);
+                    //RemoveNearAgent(message.SenderAgent);
                     break;
             }
         }

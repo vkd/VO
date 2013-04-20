@@ -44,6 +44,11 @@ namespace VirtualOrganization
             _routingService.Unsubscribe(subject);
         }
 
+        public void RemoveNearAgent(string nearAgent)
+        {
+            _routingService.RemoveNearAgent(nearAgent);
+        }
+
         public List<string> GetRoutingList()
         {
             return _routingService.GetRouting();
