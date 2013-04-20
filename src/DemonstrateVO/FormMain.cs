@@ -58,6 +58,8 @@ namespace DemonstrateVO
         private void InvokeReceiveMessage(string msg)
         {
             lbLog.Items.Add(msg);
+            lbLog.SelectedIndex = lbLog.Items.Count - 1;
+            lbLog.SelectedIndex = -1;
             Refresh();
         }
 

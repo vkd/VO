@@ -31,30 +31,36 @@ namespace VirtualOrganization
 
         public void AddNearAgent(string nearAgent)
         {
-            _nearAgents.Add(nearAgent);
-
-            AgentMessage msg = new AgentMessage()
+            if (!_nearAgents.Exists(a => a == nearAgent))
             {
-                MessageType = MessageType.Hello,
-                SenderAgent = AgentName
-            };
-            _messageService.SendMessage(nearAgent, msg);
+                _nearAgents.Add(nearAgent);
 
-            SubscribeAll(nearAgent);
+                AgentMessage msg = new AgentMessage()
+                {
+                    MessageType = MessageType.Hello,
+                    SenderAgent = AgentName
+                };
+                _messageService.SendMessage(nearAgent, msg);
+
+                SubscribeAll(nearAgent);
+            }
         }
 
         public void RemoveNearAgent(string nearAgent)
         {
-            _nearAgents.Remove(nearAgent);
-
-            AgentMessage msg = new AgentMessage()
+            if (_nearAgents.Exists(a => a == nearAgent))
             {
-                MessageType = MessageType.Bye,
-                SenderAgent = AgentName
-            };
-            _messageService.SendMessage(nearAgent, msg);
+                _nearAgents.Remove(nearAgent);
 
-            RemoveAgentFromRoutingTable(nearAgent);
+                AgentMessage msg = new AgentMessage()
+                {
+                    MessageType = MessageType.Bye,
+                    SenderAgent = AgentName
+                };
+                _messageService.SendMessage(nearAgent, msg);
+
+                RemoveAgentFromRoutingTable(nearAgent);
+            }
         }
 
         public void Publish(string subject, string text)
@@ -89,16 +95,19 @@ namespace VirtualOrganization
 
         public void Unsubscribe(string subject)
         {
-            _subscribed.Remove(subject);
-
-            AgentMessage msg = new AgentMessage()
+            if (_subscribed.Exists(s => s == subject))
             {
-                MessageType = MessageType.Unsubscribe,
-                SenderAgent = AgentName,
-                Subject = subject
-            };
+                _subscribed.Remove(subject);
 
-            SendMessageToNearAgents(msg);
+                AgentMessage msg = new AgentMessage()
+                {
+                    MessageType = MessageType.Unsubscribe,
+                    SenderAgent = AgentName,
+                    Subject = subject
+                };
+
+                SendMessageToNearAgents(msg);
+            }
         }
 
         public List<string> GetRouting()
