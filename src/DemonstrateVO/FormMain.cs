@@ -28,6 +28,10 @@ namespace DemonstrateVO
                 msg += " +";
             else if (e.AgentMessage.MessageType == MessageType.Unsubscribe)
                 msg += " -";
+            else if (e.AgentMessage.MessageType == MessageType.Hello)
+                msg += " hello";
+            else if (e.AgentMessage.MessageType == MessageType.Bye)
+                msg += " bye";
             msg += e.AgentMessage.Subject;
             if (e.AgentMessage.MessageType == MessageType.Message)
             {
@@ -93,21 +97,25 @@ namespace DemonstrateVO
         private void btnPublish_Click(object sender, System.EventArgs e)
         {
             _agent.Publish(tbPublishSubject.Text, tbPublishMessage.Text);
+            Refresh();
         }
 
         private void btnSubscribe_Click(object sender, System.EventArgs e)
         {
             _agent.Subscribe(tbSubscribeSubject.Text);
+            Refresh();
         }
 
         private void btnUnsubscribe_Click(object sender, System.EventArgs e)
         {
             _agent.Unsubscribe(tbUnsubscribeSubject.Text);
+            Refresh();
         }
 
         private void btnAddNearAgent_Click(object sender, System.EventArgs e)
         {
             _agent.AddNearAgent(tbAddNearAgent.Text);
+            Refresh();
         }
 
         private void btnRefresh_Click(object sender, System.EventArgs e)

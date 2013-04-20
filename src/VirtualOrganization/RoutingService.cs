@@ -52,18 +52,7 @@ namespace VirtualOrganization
             };
             _messageService.SendMessage(nearAgent, msg);
 
-            List<string> removeKeys = new List<string>();
-            foreach (var route in _routingTable)
-            {
-                route.Value.Remove(nearAgent);
-                if (route.Value.Count == 0)
-                    removeKeys.Add(route.Key);
-            }
-
-            foreach (var key in removeKeys)
-            {
-                _routingTable.Remove(key);
-            }
+            RemoveAgentFromRoutingTable(nearAgent);
         }
 
         public void Publish(string subject, string text)
@@ -81,6 +70,8 @@ namespace VirtualOrganization
 
         public void Subscribe(string subject)
         {
+            _subscribed.Add(subject);
+
             AgentMessage msg = new AgentMessage()
             {
                 MessageType = MessageType.Subscribe,
@@ -93,6 +84,8 @@ namespace VirtualOrganization
 
         public void Unsubscribe(string subject)
         {
+            _subscribed.Remove(subject);
+
             AgentMessage msg = new AgentMessage()
             {
                 MessageType = MessageType.Unsubscribe,
@@ -128,6 +121,22 @@ namespace VirtualOrganization
         public List<string> GetSubscribed()
         {
             return _subscribed;
+        }
+
+        private void RemoveAgentFromRoutingTable(string nearAgent)
+        {
+            List<string> removeKeys = new List<string>();
+            foreach (var route in _routingTable)
+            {
+                route.Value.Remove(nearAgent);
+                if (route.Value.Count == 0)
+                    removeKeys.Add(route.Key);
+            }
+
+            foreach (var key in removeKeys)
+            {
+                _routingTable.Remove(key);
+            }
         }
 
         private void AddRoute(string agentName, string subject)
@@ -193,16 +202,77 @@ namespace VirtualOrganization
             switch (message.MessageType)
             {
                 case MessageType.Message:
+                    CheckInputMessage(message);
                     SendMessageIntoRouteTable(message);
                     break;
                 case MessageType.Subscribe:
+                    AddNearAgentIfExists(message.SenderAgent);
                     AddRoute(message.SenderAgent, message.Subject);
                     SendMessageToNearAgents(message);
                     break;
                 case MessageType.Unsubscribe:
                     RemoveRoute(message.SenderAgent, message.Subject);
-                    SendMessageToNearAgents(message);
+                    //SendMessageToNearAgents(message);
                     break;
+                case MessageType.Hello:
+                    AddNearAgentIfExists(message.SenderAgent);
+                    SubscribeAll(message.SenderAgent);
+                    break;
+                case MessageType.Bye:
+                    RemoveAgentFromRoutingTable(message.SenderAgent);
+                    RemoveNearAgent(message.SenderAgent);
+                    break;
+            }
+        }
+
+        private void CheckInputMessage(AgentMessage message)
+        {
+            List<string> outList;
+            if (!_routingTable.TryGetValue(message.Subject, out outList))
+            {
+                if (!_subscribed.Exists(s => s == message.Subject))
+                {
+                    AgentMessage msg = new AgentMessage()
+                    {
+                        MessageType = MessageType.Unsubscribe,
+                        SenderAgent = AgentName,
+                        Subject = message.Subject
+                    };
+                    _messageService.SendMessage(message.SenderAgent, msg);
+                }
+            }
+        }
+
+        private void SubscribeAll(string nearAgent)
+        {
+            foreach (var route in _routingTable)
+            {
+                AgentMessage msg = new AgentMessage()
+                {
+                    MessageType = MessageType.Subscribe,
+                    SenderAgent = AgentName,
+                    Subject = route.Key
+                };
+                _messageService.SendMessage(nearAgent, msg);
+            }
+
+            foreach (var sub in _subscribed)
+            {
+                AgentMessage msg = new AgentMessage()
+                {
+                    MessageType = MessageType.Subscribe,
+                    SenderAgent = AgentName,
+                    Subject = sub
+                };
+                _messageService.SendMessage(nearAgent, msg);
+            }
+        }
+
+        private void AddNearAgentIfExists(string nearAgent)
+        {
+            if (!_nearAgents.Exists(a => a == nearAgent))
+            {
+                AddNearAgent(nearAgent);
             }
         }
 
