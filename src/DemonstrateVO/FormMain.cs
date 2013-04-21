@@ -15,12 +15,6 @@ namespace DemonstrateVO
             InitializeComponent();
         }
 
-        private void btnSetAgent_Click(object sender, System.EventArgs e)
-        {
-            _agent = new Agent(tbAgent.Text);
-            _agent.ReceiveMessage += new AgentMessageEventHandler(_agent_ReceiveMessage);
-        }
-
         void _agent_ReceiveMessage(AgentMessageEventArgs e)
         {
             string msg = "[" + e.AgentMessage.SenderAgent + "]";
@@ -60,10 +54,10 @@ namespace DemonstrateVO
             lbLog.Items.Add(msg);
             lbLog.SelectedIndex = lbLog.Items.Count - 1;
             lbLog.SelectedIndex = -1;
-            Refresh();
+            RefreshLists();
         }
 
-        private void Refresh()
+        private void RefreshLists()
         {
             RefreshRouting();
             RefreshNearAgents();
@@ -103,38 +97,102 @@ namespace DemonstrateVO
             }
         }
 
-        private void btnPublish_Click(object sender, System.EventArgs e)
+        private void btnRefresh_Click(object sender, System.EventArgs e)
         {
-            _agent.Publish(tbPublishSubject.Text, tbPublishMessage.Text);
-            Refresh();
+            RefreshLists();
+        }
+
+        private void FormMain_Load(object sender, System.EventArgs e)
+        {
+            FormAgentName frmAgentName = new FormAgentName("Введите имя агента");
+            frmAgentName.ShowDialog();
+            if (frmAgentName.DialogResult != DialogResult.OK)
+            {
+                this.Close();
+            }
+
+            if (!CheckAgentName(frmAgentName.AgentName))
+            {
+                this.Close();
+            }
+
+            this.Text += " - " + frmAgentName.AgentName;
+
+            _agent = new Agent(frmAgentName.AgentName);
+            _agent.ReceiveMessage += new AgentMessageEventHandler(_agent_ReceiveMessage);
+        }
+
+        private bool CheckAgentName(string agentName)
+        {
+            if (agentName.Length == 0)
+                return false;
+
+            return true;
+        }
+
+        private void btnSend_Click(object sender, System.EventArgs e)
+        {
+            FormPublish frmPublish = new FormPublish();
+            frmPublish.ShowDialog();
+
+            if (frmPublish.DialogResult == DialogResult.OK)
+            {
+                _agent.Publish(frmPublish.Subject, frmPublish.Text);
+            }
+
+            RefreshLists();
         }
 
         private void btnSubscribe_Click(object sender, System.EventArgs e)
         {
-            _agent.Subscribe(tbSubscribeSubject.Text);
-            Refresh();
+            FormSubject frmSubject = new FormSubject(btnSubscribe.Text);
+            frmSubject.ShowDialog();
+
+            if (frmSubject.DialogResult == DialogResult.OK)
+            {
+                _agent.Subscribe(frmSubject.Subject);
+            }
+
+            RefreshLists();
         }
 
         private void btnUnsubscribe_Click(object sender, System.EventArgs e)
         {
-            _agent.Unsubscribe(tbUnsubscribeSubject.Text);
-            Refresh();
+            FormSubject frmSubject = new FormSubject(btnUnsubscribe.Text);
+            frmSubject.ShowDialog();
+
+            if (frmSubject.DialogResult == DialogResult.OK)
+            {
+                _agent.Unsubscribe(frmSubject.Subject);
+            }
+
+            RefreshLists();
         }
 
-        private void btnAddNearAgent_Click(object sender, System.EventArgs e)
+        private void btnAddAgent_Click(object sender, System.EventArgs e)
         {
-            _agent.AddNearAgent(tbAddNearAgent.Text);
-            Refresh();
+            FormAgentName frmAgentName = new FormAgentName("Добавить агента");
+            frmAgentName.ShowDialog();
+
+            if (frmAgentName.DialogResult == DialogResult.OK)
+            {
+                _agent.AddNearAgent(frmAgentName.AgentName);
+            }
+
+            RefreshLists();
         }
 
-        private void btnRefresh_Click(object sender, System.EventArgs e)
+        private void btnRemoveAgent_Click(object sender, System.EventArgs e)
         {
-            Refresh();
-        }
+            FormAgentName frmAgentName = new FormAgentName("Удалить агента");
+            frmAgentName.ShowDialog();
 
-        private void btnRemoveNearAgent_Click(object sender, System.EventArgs e)
-        {
-            _agent.RemoveNearAgent(tbAddNearAgent.Text);
+            if (frmAgentName.DialogResult == DialogResult.OK)
+            {
+                _agent.RemoveNearAgent(frmAgentName.AgentName);
+            }
+
+            RefreshLists();
         }
     }
 }

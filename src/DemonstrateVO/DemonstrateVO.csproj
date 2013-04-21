@@ -46,16 +46,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAgentName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAgentName.Designer.cs">
+      <DependentUpon>FormAgentName.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPublish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPublish.Designer.cs">
+      <DependentUpon>FormPublish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSubject.Designer.cs">
+      <DependentUpon>FormSubject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAgentName.resx">
+      <DependentUpon>FormAgentName.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPublish.resx">
+      <DependentUpon>FormPublish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSubject.resx">
+      <DependentUpon>FormSubject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

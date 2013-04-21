@@ -221,7 +221,7 @@ namespace VirtualOrganization
                     SendMessageIntoRouteTable(message);
                     break;
                 case MessageType.Subscribe:
-                    AddNearAgentIfExists(message.SenderAgent);
+                    AddNearAgentIfNotExists(message.SenderAgent);
                     AddRoute(message.SenderAgent, message.Subject);
                     SendMessageToNearAgents(message);
                     break;
@@ -230,8 +230,8 @@ namespace VirtualOrganization
                     //SendMessageToNearAgents(message);
                     break;
                 case MessageType.Hello:
-                    AddNearAgentIfExists(message.SenderAgent);
-                    SubscribeAll(message.SenderAgent);
+                    AddNearAgentIfNotExists(message.SenderAgent);
+                    //SubscribeAll(message.SenderAgent);
                     break;
                 case MessageType.Bye:
                     RemoveAgentFromRoutingTable(message.SenderAgent);
@@ -284,7 +284,7 @@ namespace VirtualOrganization
             }
         }
 
-        private void AddNearAgentIfExists(string nearAgent)
+        private void AddNearAgentIfNotExists(string nearAgent)
         {
             if (!_nearAgents.Exists(a => a == nearAgent))
             {
