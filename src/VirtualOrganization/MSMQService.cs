@@ -11,7 +11,7 @@ namespace VirtualOrganization
         /// <summary>
         /// Prefix for path of agent
         /// </summary>
-        private const string PREFIX_PATH = @".\private$\";
+        private string _prefixPath = @".\private$\";
 
         /// <summary>
         /// Path of this agent
@@ -35,7 +35,7 @@ namespace VirtualOrganization
         /// <param name="message">Message</param>
         public void SendMessage(string receiverAgent, AgentMessage message)
         {
-            string pathAgent = PREFIX_PATH + receiverAgent;
+            string pathAgent = _prefixPath + receiverAgent;
 
             MessageQueue mq;
             if (MessageQueue.Exists(pathAgent))
@@ -60,7 +60,7 @@ namespace VirtualOrganization
         /// </summary>
         private void BeginReceive(string senderAgent)
         {
-            string pathAgent = PREFIX_PATH + senderAgent;
+            string pathAgent = _prefixPath + senderAgent;
 
             MessageQueue mq;
             if (MessageQueue.Exists(pathAgent))
@@ -86,6 +86,15 @@ namespace VirtualOrganization
             Publish(new AgentMessageEventArgs(agentMessage));
 
             mq.BeginReceive();
+        }
+
+        /// <summary>
+        /// Prefix for path of agent
+        /// </summary>
+        public string PrefixPath
+        {
+            get { return _prefixPath; }
+            set { _prefixPath = value; }
         }
 
         /// <summary>
