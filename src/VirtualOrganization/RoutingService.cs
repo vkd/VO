@@ -2,16 +2,41 @@
 
 namespace VirtualOrganization
 {
+    /// <summary>
+    /// Routing service
+    /// </summary>
     public class RoutingService
     {
+        /// <summary>
+        /// Message service
+        /// </summary>
         private IMessageService _messageService;
 
+        /// <summary>
+        /// Routing table
+        /// </summary>
         private Dictionary<string, List<string>> _routingTable = new Dictionary<string, List<string>>();
+
+        /// <summary>
+        /// List of subscried
+        /// </summary>
         private List<string> _subscribed = new List<string>();
+
+        /// <summary>
+        /// List of near agents
+        /// </summary>
         private List<string> _nearAgents = new List<string>();
 
+        /// <summary>
+        /// Event of receive message
+        /// </summary>
         public event AgentMessageEventHandler ReceiveMessageEvent;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="agentName">Name of this agent</param>
+        /// <param name="nearAgents">Array of near agents</param>
         public RoutingService(string agentName, string[] nearAgents = null)
         {
             AgentName = agentName;
@@ -29,6 +54,10 @@ namespace VirtualOrganization
 
         }
 
+        /// <summary>
+        /// Add near agent
+        /// </summary>
+        /// <param name="nearAgent">Name of the near agent</param>
         public void AddNearAgent(string nearAgent)
         {
             if (!_nearAgents.Exists(a => a == nearAgent))
@@ -46,6 +75,10 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Remove near agent
+        /// </summary>
+        /// <param name="nearAgent">Name of the near agent</param>
         public void RemoveNearAgent(string nearAgent)
         {
             if (_nearAgents.Exists(a => a == nearAgent))
@@ -63,6 +96,11 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Publish
+        /// </summary>
+        /// <param name="subject">Subject</param>
+        /// <param name="text">Text</param>
         public void Publish(string subject, string text)
         {
             AgentMessage msg = new AgentMessage()
@@ -76,6 +114,10 @@ namespace VirtualOrganization
             SendMessageIntoRouteTable(msg);
         }
 
+        /// <summary>
+        /// Subscribe
+        /// </summary>
+        /// <param name="subject">Subject</param>
         public void Subscribe(string subject)
         {
             if (!_subscribed.Exists(s => s == subject))
@@ -93,6 +135,10 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Unsubscribe
+        /// </summary>
+        /// <param name="subject">Subject</param>
         public void Unsubscribe(string subject)
         {
             if (_subscribed.Exists(s => s == subject))
@@ -110,6 +156,10 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Get routing table
+        /// </summary>
+        /// <returns>List of the routing table</returns>
         public List<string> GetRouting()
         {
             List<string> outList = new List<string>();
@@ -127,16 +177,28 @@ namespace VirtualOrganization
             return outList;
         }
 
+        /// <summary>
+        /// Get near agents
+        /// </summary>
+        /// <returns>List of near agents</returns>
         public List<string> GetNearAgents()
         {
             return _nearAgents;
         }
 
+        /// <summary>
+        /// Get subscribed
+        /// </summary>
+        /// <returns>List of subscribed</returns>
         public List<string> GetSubscribed()
         {
             return _subscribed;
         }
 
+        /// <summary>
+        /// Remove the agent from the routing table
+        /// </summary>
+        /// <param name="nearAgent">Name of the near agent</param>
         private void RemoveAgentFromRoutingTable(string nearAgent)
         {
             List<string> removeKeys = new List<string>();
@@ -153,6 +215,11 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Add route in routing table
+        /// </summary>
+        /// <param name="agentName">Name of the agent</param>
+        /// <param name="subject">Subject</param>
         private void AddRoute(string agentName, string subject)
         {
             List<string> outList;
@@ -169,6 +236,11 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Remove from the routing table
+        /// </summary>
+        /// <param name="agentName">Name of the agent</param>
+        /// <param name="subject">Subject</param>
         private void RemoveRoute(string agentName, string subject)
         {
             List<string> outList;
@@ -183,6 +255,10 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Send message into route table
+        /// </summary>
+        /// <param name="message">Message</param>
         private void SendMessageIntoRouteTable(AgentMessage message)
         {
             List<string> outList;
@@ -196,6 +272,10 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Send message to near agents
+        /// </summary>
+        /// <param name="message"></param>
         private void SendMessageToNearAgents(AgentMessage message)
         {
             foreach (var agent in _nearAgents)
@@ -205,11 +285,19 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Receive message method
+        /// </summary>
+        /// <param name="e">AgentMessaegEventArgs</param>
         private void MessageService_Publish(AgentMessageEventArgs e)
         {
             ReceiveMessage(e.AgentMessage);
         }
 
+        /// <summary>
+        /// Receivee message
+        /// </summary>
+        /// <param name="message">Message</param>
         private void ReceiveMessage(AgentMessage message)
         {
             ReceiveMessageEvent(new AgentMessageEventArgs(message));
@@ -217,7 +305,7 @@ namespace VirtualOrganization
             switch (message.MessageType)
             {
                 case MessageType.Message:
-                    CheckInputMessage(message);
+                    UnsubscribeIfNeed(message);
                     SendMessageIntoRouteTable(message);
                     break;
                 case MessageType.Subscribe:
@@ -241,7 +329,11 @@ namespace VirtualOrganization
             }
         }
 
-        private void CheckInputMessage(AgentMessage message)
+        /// <summary>
+        /// Unsubscrie if need
+        /// </summary>
+        /// <param name="message">Message</param>
+        private void UnsubscribeIfNeed(AgentMessage message)
         {
             List<string> outList;
             if (!_routingTable.TryGetValue(message.Subject, out outList))
@@ -259,6 +351,10 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Send all subscribe to near agent
+        /// </summary>
+        /// <param name="nearAgent">Name of the near agent</param>
         private void SubscribeAll(string nearAgent)
         {
             foreach (var route in _routingTable)
@@ -284,6 +380,10 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Add near agent if not exists
+        /// </summary>
+        /// <param name="nearAgent">Name of the near agent</param>
         private void AddNearAgentIfNotExists(string nearAgent)
         {
             if (!_nearAgents.Exists(a => a == nearAgent))
@@ -292,6 +392,9 @@ namespace VirtualOrganization
             }
         }
 
+        /// <summary>
+        /// Name of this agent
+        /// </summary>
         public string AgentName { get; set; }
     }
 }
