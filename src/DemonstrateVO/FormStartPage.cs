@@ -3,18 +3,32 @@ using System.Windows.Forms;
 
 namespace DemonstrateVO
 {
+    /// <summary>
+    /// Class form of choise type of agent
+    /// </summary>
     public partial class FormStartPage : Form
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public FormStartPage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Change checked to buyer agent
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">EventArgs</param>
         private void rbBuyerAgent_CheckedChanged(object sender, EventArgs e)
         {
             CheckedChanged();
         }
 
+        /// <summary>
+        /// Checked changed
+        /// </summary>
         private void CheckedChanged()
         {
             if (rbBuyerAgent.Checked)
@@ -39,16 +53,31 @@ namespace DemonstrateVO
             }
         }
 
+        /// <summary>
+        /// Change checked to initiator agent
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">EventArgs</param>
         private void rbInitiatorAgent_CheckedChanged(object sender, EventArgs e)
         {
             CheckedChanged();
         }
 
+        /// <summary>
+        /// Change checked to worker agent
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">EventArgs</param>
         private void rbWorkerAgent_CheckedChanged(object sender, EventArgs e)
         {
             CheckedChanged();
         }
 
+        /// <summary>
+        /// Press OK
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">EventArgs</param>
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (tbAgentName.Text == "")

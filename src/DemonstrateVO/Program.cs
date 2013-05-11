@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace DemonstrateVO
 {
+    /// <summary>
+    /// Main class
+    /// </summary>
     static class Program
     {
         /// <summary>

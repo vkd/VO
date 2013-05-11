@@ -2,6 +2,9 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="VirtualOrganization.WorkerAgent" Collapsed="true">
     <Position X="4.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WorkerAgent.cs</FileName>
@@ -14,15 +17,15 @@
       <FileName>AgentBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VirtualOrganization.AgentMessage">
-    <Position X="13.75" Y="4.75" Width="1.5" />
+  <Class Name="VirtualOrganization.AgentMessage" Collapsed="true">
+    <Position X="6.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAEAAAAAIAgAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>AgentMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VirtualOrganization.AgentMessageEventArgs" Collapsed="true">
-    <Position X="13.25" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="3" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AgentMessageEventArgs.cs</FileName>
@@ -43,7 +46,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VirtualOrganization.MSMQService" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="15" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAEAGIAAAAAAEAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>MSMQService.cs</FileName>
@@ -51,28 +54,28 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="VirtualOrganization.RoutingService" Collapsed="true">
-    <Position X="11.5" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAkAAAhgQQAEFAABGAIAgAgACACAEAAQCAAAAgAAAA=</HashCode>
       <FileName>RoutingService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="VirtualOrganization.IMessageService" Collapsed="true">
-    <Position X="11.5" Y="1.75" Width="1.5" />
+    <Position X="4.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IMessageService.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="VirtualOrganization.MessageType">
-    <Position X="15.75" Y="4.75" Width="1.5" />
+  <Enum Name="VirtualOrganization.MessageType" Collapsed="true">
+    <Position X="4.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAIAAAAAAAAAAAAAACAAAAQAAAIAAAAAA=</HashCode>
       <FileName>AgentMessage.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Delegate Name="VirtualOrganization.AgentMessageEventHandler" Collapsed="true">
-    <Position X="11.5" Y="2.5" Width="1.5" />
+    <Position X="4.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>AgentMessageEventArgs.cs</FileName>
