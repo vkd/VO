@@ -12,6 +12,11 @@ namespace VirtualOrganization
         public string SenderAgent { get; set; }
 
         /// <summary>
+        /// Owner the message
+        /// </summary>
+        public string Owner { get; set; }
+
+        /// <summary>
         /// Subject
         /// </summary>
         public string Subject { get; set; }

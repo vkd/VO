@@ -6,14 +6,14 @@ using System.Text;
 namespace VirtualOrganization
 {
     /// <summary>
-    /// Publish/Subscribe agent
+    /// Abstract class of agent
     /// </summary>
-    public class Agent
+    public abstract class AgentBase
     {
         /// <summary>
         /// Routing service
         /// </summary>
-        private RoutingService _routingService;
+        protected RoutingService _routingService;
 
         /// <summary>
         /// Event of receive message
@@ -25,7 +25,7 @@ namespace VirtualOrganization
         /// </summary>
         /// <param name="agentName">Name of this agent</param>
         /// <param name="nearAgents">Array of the near agents</param>
-        public Agent(string agentName, string[] nearAgents = null)
+        public AgentBase(string agentName, string[] nearAgents = null)
         {
             AgentName = agentName;
             _routingService = new RoutingService(AgentName, nearAgents);
@@ -51,14 +51,23 @@ namespace VirtualOrganization
             _routingService.AddNearAgent(nearAgent);
         }
 
+
         /// <summary>
-        /// Publish
+        /// Remove near agent
         /// </summary>
-        /// <param name="subject">Subject</param>
-        /// <param name="text">Message</param>
-        public void Publish(string subject, string text)
+        /// <param name="nearAgent">Name removed agent</param>
+        public void RemoveNearAgent(string nearAgent)
         {
-            _routingService.Publish(subject, text);
+            _routingService.RemoveNearAgent(nearAgent);
+        }
+
+        /// <summary>
+        /// Get near agents
+        /// </summary>
+        /// <returns>List of near agents</returns>
+        public List<string> GetNearAgents()
+        {
+            return _routingService.GetNearAgents();
         }
 
         /// <summary>
@@ -80,13 +89,15 @@ namespace VirtualOrganization
         }
 
         /// <summary>
-        /// Remove near agent
+        /// Publish
         /// </summary>
-        /// <param name="nearAgent">Name removed agent</param>
-        public void RemoveNearAgent(string nearAgent)
+        /// <param name="subject">Subject</param>
+        /// <param name="text">Message</param>
+        public void Publish(string subject, string text)
         {
-            _routingService.RemoveNearAgent(nearAgent);
+            _routingService.Publish(subject, text);
         }
+
 
         /// <summary>
         /// Get routing list
@@ -95,15 +106,6 @@ namespace VirtualOrganization
         public List<string> GetRoutingList()
         {
             return _routingService.GetRouting();
-        }
-
-        /// <summary>
-        /// Get near agents
-        /// </summary>
-        /// <returns>List of near agents</returns>
-        public List<string> GetNearAgents()
-        {
-            return _routingService.GetNearAgents();
         }
 
         /// <summary>

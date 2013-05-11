@@ -24,7 +24,7 @@ namespace DemonstrateVO
         private void btnOK_Click(object sender, EventArgs e)
         {
             Subject = tbPublishSubject.Text;
-            Text = tbPublishMessage.Text;
+            TextMsg = tbPublishMessage.Text;
         }
 
         public string Subject
@@ -33,7 +33,7 @@ namespace DemonstrateVO
             private set;
         }
 
-        public string Text
+        public string TextMsg
         {
             get;
             private set;

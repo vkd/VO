@@ -48,7 +48,8 @@ namespace VirtualOrganization
                 MessageType = message.MessageType,
                 SenderAgent = _pathService,
                 Subject = message.Subject,
-                Text = message.Text
+                Text = message.Text,
+                Owner = message.Owner
             };
 
             //message.SenderAgent = _pathService;

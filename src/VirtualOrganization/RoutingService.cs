@@ -40,6 +40,7 @@ namespace VirtualOrganization
         public RoutingService(string agentName, string[] nearAgents = null)
         {
             AgentName = agentName;
+            _subscribed.Add(agentName);
 
             if (nearAgents != null)
             {
@@ -52,6 +53,25 @@ namespace VirtualOrganization
             _messageService = new MSMQService(AgentName);
             _messageService.Publish += new AgentMessageEventHandler(MessageService_Publish);
 
+        }
+
+        /// <summary>
+        /// Destructor
+        /// </summary>
+        ~RoutingService()
+        {
+            foreach (var na in _nearAgents)
+            {
+                AgentMessage msg = new AgentMessage()
+                {
+                    MessageType = MessageType.Bye,
+                    Owner = AgentName,
+                    SenderAgent = AgentName,
+                    Subject = "",
+                    Text = ""
+                };
+                _messageService.SendMessage(na, msg);
+            }
         }
 
         /// <summary>
@@ -108,7 +128,8 @@ namespace VirtualOrganization
                 MessageType = MessageType.Message,
                 SenderAgent = AgentName,
                 Subject = subject,
-                Text = text
+                Text = text,
+                Owner = AgentName
             };
 
             SendMessageIntoRouteTable(msg);
@@ -300,12 +321,14 @@ namespace VirtualOrganization
         /// <param name="message">Message</param>
         private void ReceiveMessage(AgentMessage message)
         {
+#if DEBUG
             ReceiveMessageEvent(new AgentMessageEventArgs(message));
-
+#endif
             switch (message.MessageType)
             {
                 case MessageType.Message:
                     UnsubscribeIfNeed(message);
+                    ReceiveMessageIfNeed(message);
                     SendMessageIntoRouteTable(message);
                     break;
                 case MessageType.Subscribe:
@@ -326,6 +349,20 @@ namespace VirtualOrganization
                     _nearAgents.Remove(message.SenderAgent);
                     //RemoveNearAgent(message.SenderAgent);
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Receive message if this agent subscribed on input message
+        /// </summary>
+        /// <param name="message">Message</param>
+        private void ReceiveMessageIfNeed(AgentMessage message)
+        {
+            if (_subscribed.Exists(s => s == message.Subject))
+            {
+#if !DEBUG
+                ReceiveMessageEvent(new AgentMessageEventArgs(message));
+#endif
             }
         }
 

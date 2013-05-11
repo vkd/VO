@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAgentName));
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblAgent = new System.Windows.Forms.Label();
             this.tbAgent = new System.Windows.Forms.TextBox();
@@ -82,6 +83,7 @@
             this.Controls.Add(this.lblAgent);
             this.Controls.Add(this.tbAgent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormAgentName";
             this.Text = "Введите имя агента";
